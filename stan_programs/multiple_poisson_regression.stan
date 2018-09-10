@@ -14,24 +14,25 @@ data {
   int<lower=1> N;
   int<lower=0> complaints[N];
   vector<lower=0>[N] traps;
+  vector<lower=0,upper=1>[N] live_in_super;
+  vector[N] log_sq_foot;  // exposure term
 }
 parameters {
   real alpha;
   real beta;
+  real beta_super;
 }
 model {
-  // weakly informative priors:
-  // we expect negative slope on traps and a positive intercept,
-  // but we will allow ourselves to be wrong
   beta ~ normal(-0.25, 1);
+  beta_super ~ normal(-0.5, 1);
   alpha ~ normal(log(4), 1);
   
-  // poisson_log(eta) is more efficient and stable alternative to poisson(exp(eta))
-  complaints ~ poisson_log(alpha + beta * traps);
+  complaints ~ poisson_log(alpha + beta * traps + beta_super * live_in_super + log_sq_foot);
 } 
 generated quantities {
   int y_rep[N];
   
   for (n in 1:N) 
-    y_rep[n] = poisson_log_safe_rng(alpha + beta * traps[n]);
+    y_rep[n] = poisson_log_safe_rng(alpha + beta * traps[n] + beta_super * live_in_super[n]
+                                   + log_sq_foot[n]);
 }

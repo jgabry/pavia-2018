@@ -318,6 +318,7 @@ stan_dat_simple <- list(
   complaints = pest_data$complaints,
   traps = pest_data$traps
 )
+str(stan_dat_simple)
 ```
 
 As we have already compiled the model, we can jump straight to sampling from it.
@@ -336,6 +337,7 @@ We can also plot the posterior distributions:
 
 ```{r hist_simple_P}
 mcmc_hist(as.matrix(fit_P_real_data, pars = c('alpha','beta')))
+mcmc_scatter(as.matrix(fit_P_real_data, pars = c('alpha','beta')), alpha = 0.2)
 ```
 
 As we expected, it appears the number of bait stations set in a building is
