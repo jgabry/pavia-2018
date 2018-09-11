@@ -31,7 +31,9 @@ model {
 } 
 generated quantities {
   int y_rep[N];
-  
-  for (n in 1:N) 
-    y_rep[n] = poisson_log_safe_rng(alpha + beta * traps[n]);
+
+  for (n in 1:N) {
+    real eta_n = alpha + beta * traps[n];
+    y_rep[n] = poisson_log_safe_rng(eta_n);
+  }
 }
