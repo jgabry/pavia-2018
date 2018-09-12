@@ -32,8 +32,8 @@ model {
                                   + log_sq_foot;
   alpha ~ normal(log(4), 1);
   beta ~ normal(-0.25, 1);
-  beta_super ~ normal(-0.5, 1);
   inv_phi ~ normal(0, 1);
+  beta_super ~ normal(-0.5, 1);
   
   complaints ~ neg_binomial_2_log(eta, phi);
 } 

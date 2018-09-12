@@ -788,7 +788,7 @@ monthly rent so we can add that data into a matrix called
 We'll write the Stan model like:
 
 $$
-\eta_{b,t} = \alpha_b + \beta \, {\rm traps} + \text{log_sq_foot}\\
+\eta_{b,t} = \mu_b + \beta \, {\rm traps} + \text{log_sq_foot}\\
 \mu \sim \text{Normal}(\alpha + \texttt{building_data} \, \zeta, \,\sigma_{\mu})
 $$
 
@@ -1011,7 +1011,7 @@ comp_model_NB_hier_ncp <- stan_model('stan_programs/hier_NB_regression_ncp.stan'
 Fit the model to the data.
 
 ```{r run-NB-hier-ncp}
-fitted_model_NB_hier_ncp <- sampling(comp_model_NB_hier_ncp, data = stan_dat_hier, chains = 4, cores = 4, control = list(adapt_delta = 0.95))
+fitted_model_NB_hier_ncp <- sampling(comp_model_NB_hier_ncp, data = stan_dat_hier, chains = 4, cores = 4)
 ```
 
 Examining the fit of the new model
@@ -1069,8 +1069,9 @@ ppc_stat_grouped(
 ```
 
 We weren't doing terribly with the building-specific means before, but now they
-are all well-captured by our model. The model is also able to do a decent job
-estimating within-building variability:
+are all estimated a bit better by the model. The model is also able to do a
+decent job estimating within-building variability and, for the most part, 
+the probability of zero complaints:
 
 ```{r}
 ppc_stat_grouped(
@@ -1079,6 +1080,25 @@ ppc_stat_grouped(
   group = pest_data$building_id,
   stat = 'sd',
   binwidth = 0.5
+)
+```
+
+```{r}
+prop_zero <- function(x) mean(x == 0)
+ppc_stat(
+  y = stan_dat_hier$complaints,
+  yrep = y_rep,
+  stat = prop_zero,
+  binwidth = 0.025
+)
+
+# plot separately for each building
+ppc_stat_grouped(
+  y = stan_dat_hier$complaints,
+  yrep = y_rep,
+  group = pest_data$building_id,
+  stat = prop_zero,
+  binwidth = 0.025
 )
 ```
 

@@ -393,7 +393,7 @@ parcoord_with_divs
 comp_model_NB_hier_ncp <- stan_model('stan_programs/hier_NB_regression_ncp.stan')
 
 ## ----run-NB-hier-ncp-----------------------------------------------------
-fitted_model_NB_hier_ncp <- sampling(comp_model_NB_hier_ncp, data = stan_dat_hier, chains = 4, cores = 4, control = list(adapt_delta = 0.95))
+fitted_model_NB_hier_ncp <- sampling(comp_model_NB_hier_ncp, data = stan_dat_hier, chains = 4, cores = 4)
 
 ## ----n-eff-NB-hier-ncp-check---------------------------------------------
 print(fitted_model_NB_hier_ncp, pars = c('sigma_mu','beta','alpha','phi','mu'))
@@ -407,6 +407,8 @@ scatter_no_divs <- mcmc_scatter(
 )
 bayesplot_grid(scatter_with_divs, scatter_no_divs,
                grid_args = list(ncol = 2), ylim = c(-11, 1))
+
+
 
 ## ------------------------------------------------------------------------
 parcoord_no_divs <- mcmc_parcoord(
@@ -441,6 +443,27 @@ ppc_stat_grouped(
   binwidth = 0.5
 )
 
+
+## ------------------------------------------------------------------------
+prop_zero <- function(x) mean(x == 0)
+ppc_stat(
+  y = stan_dat_hier$complaints,
+  yrep = y_rep,
+  stat = prop_zero,
+  binwidth = 0.025
+)
+
+# plot separately for each building
+ppc_stat_grouped(
+  y = stan_dat_hier$complaints,
+  yrep = y_rep,
+  group = pest_data$building_id,
+  stat = prop_zero,
+  binwidth = 0.025
+)
+
+
+
 ## ------------------------------------------------------------------------
 ppc_intervals(
   y = stan_dat_hier$complaints,
@@ -448,6 +471,7 @@ ppc_intervals(
   x = stan_dat_hier$traps
 ) +
   labs(x = "Number of traps", y = "Number of complaints")
+
 
 ## ------------------------------------------------------------------------
 mean_y_rep <- colMeans(y_rep)
