@@ -114,7 +114,8 @@ scatter_ncp1 <- mcmc_scatter(
 bayesplot_grid(scatter_cp1, scatter_ncp1, grid_args = list(ncol = 2), 
                titles = c("CP", "NCP"))
 
-# look at posterior distributions of mu and the thetas
+# look at posterior distributions 
+
 mu <- as.matrix(ncp_fit1, pars = "mu")
 mean(mu > 0) # est. posterior Pr(mu > 0)
 
@@ -129,6 +130,12 @@ mcmc_hist(mu, freq=FALSE, binwidth = 1) +
 mu_prior_samples <- rnorm(nrow(mu), mean = 0, sd = 10)
 mu_compare <- cbind(mu_prior = mu_prior_samples, mu)
 mcmc_hist(mu_compare, binwidth = 1.5, facet_args = list(nrow = 2)) + xlim(-30, 30)
+
+tau <- as.matrix(ncp_fit1, pars = "tau")
+tau_prior_pdf <- function(x) 2 * dnorm(x, mean = 0, sd = 10)
+mcmc_hist(tau, freq=FALSE, binwidth = 1) + 
+  overlay_function(fun = tau_prior_pdf) + 
+  xlim(0, 30)
 
 
 thetas <- as.matrix(ncp_fit1, pars = "theta")
