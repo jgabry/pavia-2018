@@ -24,5 +24,12 @@ install.packages(packages)
 
 <br>
 
+### MCMC demo website 
+
 https://chi-feng.github.io/mcmc-demo/app.html
+
+### Turn off compiler warnings
+
+http://mc-stan.org/misc/warnings.html#compiler-warnings
+
 
