@@ -1,4 +1,4 @@
-// Non-centered parameterization
+// Centered parameterization
 
 data {
   int<lower=1> J;  // Number of schools
