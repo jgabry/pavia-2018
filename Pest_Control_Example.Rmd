@@ -1527,31 +1527,37 @@ $$
 $$
 
 Given that our first term $\texttt{mo}_1$ is normally distributed, and
-subsequent terms are sums of normal random variables, we can see that jointly
-the vector, `mo`, with the $t$-th element equally the scalar
-$\texttt{mo}_t$, is multivariate normal, with mean zero (which we derived
-above). More formally, if we have a vector $x \in \mathbb{R}^M$ which is
-multivariate normal, $x \sim \text{MultiNormal}(0, \Sigma)$ and we left-multiply $x$
-by a nonsingular matrix $L \in \mathbb{R}^{M\times M}$,
+subsequent terms are sums of normal random variables, this means that jointly
+the vector `mo` is multivariate normal. 
+
+More formally, if we have a vector $x \in \mathbb{R}^M$ which is
+multivariate normal, $x \sim \text{MultiNormal}(0, \Sigma)$, and we left-multiply $x$
+by a nonsingular matrix $L \in \mathbb{R}^{M\times M}$, then
 $y = Lx \sim \text{MultiNormal}(0, L\Sigma L^T)$.
 We can use this fact to show that our vector `mo` is jointly multivariate
 normal.
 
-Just as before with the noncentered parameterization, we'll be taking a vector
-$\texttt{mo_raw} \in \mathbb{R}^M$ in which each element is univariate
-$\text{Normal}(0,1)$
-and transforming it into `mo`, but instead of doing the transformation with scalar transformations like in
-the section __Time varying effects and structured priors__, we'll do it with linear algebra operations.
-The trick is that by specifying each element of $\texttt{mo_raw}$ to be distributed $\text{Normal}(0,1)$ we
-are implicitly defining $\texttt{mo_raw} \sim \text{MultiNormal}(0, I_M)$, where $I_M$ is the identity matrix of
-dimension $M \times M$. Then we do a linear transformation using a matrix $L$ and assign the result to `mo` like $\texttt{mo} = L\times\texttt{mo_raw}$
-so $\texttt{mo} \sim \text{MultiNormal}(0, LI_M L^T)$ and $LI_M L^T = LL^T$.
+Just as before with the noncentered parameterization, we'll take a vector
+$\texttt{mo_raw} \in \mathbb{R}^M$ (in which each element is univariate
+$\text{Normal}(0,1)$) and transform it into `mo`. But instead of doing this with
+scalar transformations like we did previously 
+(e.g., in the section __Time varying effects and structured priors__) 
+we will now do it with linear algebra operations.
 
-Consider the case where we have three elements in `mo` and we want to make figure out the form for $L$.
+The trick is that by specifying each element of $\texttt{mo_raw}$ to be distributed $\text{Normal}(0,1)$ we are implicitly defining 
+$\texttt{mo_raw} \sim \text{MultiNormal}(0, I_M)$, where $I_M$ is the 
+$M \times M$ identity matrix. Then we do a linear transformation using a matrix 
+$L$ and assign the result to `mo`, i.e., $\texttt{mo} = L\times\texttt{mo_raw}$.
+This gives us $\texttt{mo} \sim \text{MultiNormal}(0, LI_M L^T)$ and 
+$LI_M L^T = LL^T$.
 
-The first element of `mo` is fairly straightforward, because it mirrors our earlier parameterization
-of the AR(1) prior. The only difference is that we're explicitly adding the last two terms of `mo_raw`
-into the equation so we can use matrix algebra for our transformation.
+Consider the case where we have three elements in `mo` and we want to figure 
+out the form for $L$.
+
+The first element of `mo` is fairly straightforward, because it mirrors our
+earlier parameterization of the AR(1) prior. The only difference is that we're
+explicitly adding the last two terms of `mo_raw` into the equation so we can use
+matrix algebra for our transformation.
 $$
 \texttt{mo}_1 = \frac{\sigma_{\texttt{mo}}}{\sqrt{1 - \rho^2}} \times \texttt{mo_raw}_1 + 0 \times \texttt{mo_raw}_2 + 0 \times \texttt{mo_raw}_3\\
 $$
@@ -1613,7 +1619,8 @@ $$
 \rho^2 \sigma^2_\texttt{mo} / (1 - \rho^2) & \rho \, \sigma^2_\texttt{mo} / (1 - \rho^2) & \sigma^2_\texttt{mo} / (1 - \rho^2)
 \end{bmatrix}
 $$
-We can simplify this result by dividing the matrix by $\sigma^2_\texttt{mo} / (1 - \rho^2)$ to get
+We can simplify this result by dividing the matrix by 
+$\sigma^2_\texttt{mo} / (1 - \rho^2)$ to get
 
 $$
 \begin{bmatrix} 1 & \rho  &  \rho^2 \\
@@ -1622,7 +1629,9 @@ $$
 \end{bmatrix}
 $$
 
-This should generalize to higher dimensions pretty easily. We could replace the Stan code in lines 59 to 63 in
+This should generalize to higher dimensions pretty easily. 
+
+We can replace the Stan code defining `mo` in 
 `stan_programs/hier_NB_regression_ncp_slopes_mod_mos.stan` with the following:
 
 ```
@@ -1630,27 +1639,27 @@ vector[M] mo;
 {
   matrix[M,M] A = rep_matrix(0, M, M);
   A[1,1] = sigma_mo / sqrt(1 - rho^2);
-  for (m in 2:M)
+  for (m in 2:M) {
     A[m,1] = rho^(m-1) * sigma_mo / sqrt(1 - rho^2);
+  }
   for (m in 2:M) {
     A[m,m] = sigma_mo;
-    for (i in (m + 1):M)
+    for (i in (m + 1):M) {
       A[i,m] = rho^(i-m) * sigma_mo;
+    }
   }
   mo = A * mo_raw;
 }
 ```
 
-It's important to the note that the existing Stan code in lines 59 to 63 is doing the exact same calculations but
-more efficiently.
-
 ### Cholesky decomposition
 
-Note that if we only knew the covariance matrix of our process, say a matrix called $\Sigma$, and we had a way
-of decomposing $\Sigma$ into $L L^T$ we wouldn't need to write out the equation for the vector. Luckily,
-there is a matrix decomposition called the __Cholesky decomposition__ that does just that. The Stan function
-for the composition is called `cholesky_decompose`. Instead of writing out the explicit equation, we could do
-the following:
+If we only knew the covariance matrix of our process, say a matrix called
+$\Sigma$, and we had a way of decomposing $\Sigma$ into $L L^T$ we wouldn't need
+to write out the equation for the vector. Luckily, there is a matrix
+decomposition called the __Cholesky decomposition__ that does just that. The
+Stan function for the composition is called `cholesky_decompose`. Instead of
+writing out the explicit equation we can just do the following
 
 ```
 vector[M] mo;
@@ -1658,14 +1667,18 @@ vector[M] mo;
   mo = cholesky_decompose(Sigma) * mo_raw;
 }
 ```
-provided we've defined `Sigma` appropriately elsewhere in the transformed parameter block. Note that the
-matrix $L$ is lower-triangular (i.e. all elements in the upper right-hand triangle of the matrix are zero).
+provided we've defined `Sigma` appropriately elsewhere in the `transformed
+parameters` block. Note that the matrix $L$ is lower-triangular (i.e. all
+elements in the upper right triangle of the matrix are zero).
 
-We've already derived the covariance matrix `Sigma` for the three-dimensional AR(1) process above by explicitly
-calculating $L L^T$, but we can do so using the rules of covariance and the way our process is defined. We already
-know that each element of $\texttt{mo}_t$ has marginal variance $\sigma^2_\texttt{mo} / (1 - \rho^2)$, but we don't know
-the covariance of $\texttt{mo}_t$ and $\texttt{mo}_{t+h}$. We can do so recursively. First we derive the
-covariance for two elements of $\texttt{mo}_t$ separated by one month:
+We've already derived the covariance matrix `Sigma` for the three-dimensional
+AR(1) process above by explicitly calculating $L L^T$, but we can do so using
+the rules of covariance and the way our process is defined. We already know that
+each element of $\texttt{mo}_t$ has marginal variance 
+$\sigma^2_\texttt{mo} / (1- \rho^2)$, but we don't know the covariance of 
+$\texttt{mo}_t$ and $\texttt{mo}_{t+h}$. 
+We can do so recursively. First we derive the covariance
+for two elements of $\texttt{mo}_t$ separated by one month:
 
 $$
 \text{Cov}(\texttt{mo}_{t+1},\texttt{mo}_{t}) = \text{Cov}(\rho \, \texttt{mo}_{t} + \sigma_\texttt{mo}\epsilon_{t+1},\texttt{mo}_{t}) \\
@@ -1689,7 +1702,7 @@ $$
 \text{Cov}(\texttt{mo}_{t+h},\texttt{mo}_{t}) = \rho^h \, \sigma_\texttt{mo}^2/(1 - \rho^2) \\
 $$
 
-Writing this in Stan code to replace lines 59 to 63 in `stan_programs/hier_NB_regression_ncp_slopes_mod_mos.stan` we would get:
+One way to write this in Stan code is:
 
 ```
 vector[M] mo;
@@ -1755,7 +1768,7 @@ $$
 $$
 
 The exponentiated quadratic kernel has two components to theta, $\alpha$, the
-marginal standard deviation of the stochastic process $f$ and $\ell$, the
+marginal standard deviation of the stochastic process $f$, and $\ell$, the
 process length-scale.
 
 The length-scale defines how quickly the covariance decays between time points, with

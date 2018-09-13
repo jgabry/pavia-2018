@@ -99,9 +99,7 @@ stan_dat_simple <- list(
 str(stan_dat_simple)
 
 ## ----fit_P_real_data, cache=TRUE-----------------------------------------
-fit_P_real_data <-
-  stan("stan_programs/simple_poisson_regression.stan", 
-       data = stan_dat_simple)
+fit_P_real_data <- sampling(comp_model_P, data = stan_dat_simple)
 
 ## ----results_simple_P----------------------------------------------------
 print(fit_P_real_data, pars = c('alpha','beta'))
@@ -112,7 +110,6 @@ mcmc_scatter(as.matrix(fit_P_real_data, pars = c('alpha','beta')), alpha = 0.2)
 
 ## ------------------------------------------------------------------------
 y_rep <- as.matrix(fit_P_real_data, pars = "y_rep")
-dim(y_rep)
 
 ## ----marginal_PPC--------------------------------------------------------
 ppc_dens_overlay(y = stan_dat_simple$complaints, y_rep[1:200,])
@@ -161,7 +158,6 @@ fitted_model_dgp <-
   seed = 123
   )
 samps_dgp <- rstan::extract(fitted_model_dgp)
-str(samps_dgp)
 
 ## ------------------------------------------------------------------------
 stan_dat_fake <- list(
@@ -408,8 +404,6 @@ scatter_no_divs <- mcmc_scatter(
 bayesplot_grid(scatter_with_divs, scatter_no_divs,
                grid_args = list(ncol = 2), ylim = c(-11, 1))
 
-
-
 ## ------------------------------------------------------------------------
 parcoord_no_divs <- mcmc_parcoord(
   as.array(fitted_model_NB_hier_ncp, pars = c("sigma_mu", "mu")),
@@ -443,7 +437,6 @@ ppc_stat_grouped(
   binwidth = 0.5
 )
 
-
 ## ------------------------------------------------------------------------
 prop_zero <- function(x) mean(x == 0)
 ppc_stat(
@@ -462,8 +455,6 @@ ppc_stat_grouped(
   binwidth = 0.025
 )
 
-
-
 ## ------------------------------------------------------------------------
 ppc_intervals(
   y = stan_dat_hier$complaints,
@@ -471,7 +462,6 @@ ppc_intervals(
   x = stan_dat_hier$traps
 ) +
   labs(x = "Number of traps", y = "Number of complaints")
-
 
 ## ------------------------------------------------------------------------
 mean_y_rep <- colMeans(y_rep)
