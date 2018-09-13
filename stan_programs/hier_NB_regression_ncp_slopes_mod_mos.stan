@@ -43,9 +43,8 @@ parameters {
   
   
   real<lower=0,upper=1> rho_raw;  // used to construct rho, the AR(1) coefficient
-  // ... N(0,1) params for non-centered param of AR(1) process
-  // ... sd of month-specific parameters
-  
+  // ... N(0,1) params for non-centered param of AR(1) process (mo_raw)
+  // ... sd of month-specific parameters (sigma_mo)
 }
 transformed parameters {
   real phi = inv(inv_phi);
@@ -57,7 +56,8 @@ transformed parameters {
   // AR(1) process priors
   real rho = 2.0 * rho_raw - 1.0;
   vector[M] mo = sigma_mo * mo_raw;
-  mo[1] /= sqrt(1 - rho^2);
+  mo[1] /= sqrt(1 - rho^2);   //   mo[1] = mo[1]/sqrt(1-rho^2)
+  
   // loop over the rest of the mo vector to add in the dependence on previous month
   // ...
 }

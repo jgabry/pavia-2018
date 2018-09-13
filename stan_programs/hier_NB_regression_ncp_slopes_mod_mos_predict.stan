@@ -37,8 +37,9 @@ transformed data {
   // We'll make predictions for 0, 1, 2, ..., 20 traps (can go further too)
   int N_hypo_traps = 21;
   int hypo_traps[N_hypo_traps];
-  for (i in 1:N_hypo_traps)
-    hypo_traps[i] = i - 1;
+  for (i in 1:N_hypo_traps) {
+    hypo_traps[i] = i - 1;  
+  }
 }
 parameters {
   real<lower=0> inv_phi;   // 1/phi (easier to think about prior for 1/phi instead of phi)
@@ -111,17 +112,21 @@ generated quantities {
   int y_pred[J,N_hypo_traps];
   matrix[J,N_hypo_traps] rev_pred;
   
-  for (j in 1:J) {
-    for (i in 1:N_hypo_traps) {
+  for (j in 1:J) { // loop over buildings
+    for (i in 1:N_hypo_traps) {  // loop over the different numbers of traps
       int y_pred_by_month[M_forward];
       vector[M_forward] mo_forward;
       
-      mo_forward[1] = normal_rng(rho * mo[M], sigma_mo);
-      for (m in 2:M_forward) 
+      // first future month depends on last observed month
+      mo_forward[1] = normal_rng(rho * mo[M], sigma_mo); 
+      for (m in 2:M_forward) {
         mo_forward[m] = normal_rng(rho * mo_forward[m-1], sigma_mo); 
+      }
         
       for (m in 1:M_forward) {
-        real eta = mu[j] + kappa[j] * hypo_traps[i] + mo_forward[m] + log_sq_foot_pred[j];
+        real eta = mu[j] + kappa[j] * hypo_traps[i] 
+                   + mo_forward[m] + log_sq_foot_pred[j];
+                   
         y_pred_by_month[m] = neg_binomial_2_log_safe_rng(eta, phi);
       }
       

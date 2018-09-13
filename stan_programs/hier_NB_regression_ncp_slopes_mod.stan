@@ -58,13 +58,17 @@ model {
   alpha ~ normal(log(4), 1);
   zeta ~ normal(0, 1);
   
-  complaints ~ neg_binomial_2_log(mu[building_idx] + kappa[building_idx] .* traps  + log_sq_foot,
-                                  phi);
+  complaints ~ neg_binomial_2_log(
+    mu[building_idx] + kappa[building_idx] .* traps  + log_sq_foot,
+    phi
+  );
 } 
 generated quantities {
   int y_rep[N];
   for (n in 1:N) {
-    real eta_n = mu[building_idx[n]] + kappa[building_idx[n]] * traps[n] + log_sq_foot[n];
+    real eta_n = 
+      mu[building_idx[n]] + kappa[building_idx[n]] * traps[n] + log_sq_foot[n];
+      
     y_rep[n] = neg_binomial_2_log_safe_rng(eta_n, phi);
   }
 }
