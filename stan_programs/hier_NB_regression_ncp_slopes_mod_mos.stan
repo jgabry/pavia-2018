@@ -26,8 +26,7 @@ data {
   matrix[J,K] building_data;
   
   // month info
-  // Number of months (M)
-  // Month indexes (mo_idx)
+  // ... Number of months (M) and month indexes (mo_idx)
 }
 parameters {
   real<lower=0> inv_phi;   // 1/phi (easier to think about prior for 1/phi instead of phi)
