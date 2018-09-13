@@ -27,6 +27,8 @@ data {
   
   // month info
   // ... Number of months (M) and month indexes (mo_idx)
+  int<lower=1> M;
+  int<lower=1,upper=M> mo_idx[N];
 }
 parameters {
   real<lower=0> inv_phi;   // 1/phi (easier to think about prior for 1/phi instead of phi)
@@ -44,7 +46,9 @@ parameters {
   
   real<lower=0,upper=1> rho_raw;  // used to construct rho, the AR(1) coefficient
   // ... N(0,1) params for non-centered param of AR(1) process (mo_raw)
+  vector[M] mo_raw;
   // ... sd of month-specific parameters (sigma_mo)
+  real<lower=0> sigma_mo;
 }
 transformed parameters {
   real phi = inv(inv_phi);
@@ -56,10 +60,11 @@ transformed parameters {
   // AR(1) process priors
   real rho = 2.0 * rho_raw - 1.0;
   vector[M] mo = sigma_mo * mo_raw;
-  mo[1] /= sqrt(1 - rho^2);   //   mo[1] = mo[1]/sqrt(1-rho^2)
-  
-  // loop over the rest of the mo vector to add in the dependence on previous month
-  // ...
+  mo[1] /= sqrt(1 - rho^2);
+  for (m in 2:M) {
+    mo[m] += rho * mo[m-1];
+    //mo[m] = mo[m] + rho * mo[m-1];
+  }
 }
 model {
   inv_phi ~ normal(0, 1);
@@ -75,14 +80,15 @@ model {
   zeta ~ normal(0, 1);
   
   rho_raw ~ beta(10, 5);
-  // ... prior for mo_raw
-  // ... prior for sigma_mo
+  mo_raw ~ normal(0,1);
+  sigma_mo ~ normal(0,1);
   
-  complaints ~ neg_binomial_2_log(mu[building_idx] 
-                                 + kappa[building_idx] .* traps 
-                                 // ... add month-specific parameters
-                                 + log_sq_foot, 
-                                 phi);
+  complaints ~ neg_binomial_2_log(
+    mu[building_idx] 
+    + kappa[building_idx] .* traps 
+    + mo[mo_idx]
+    + log_sq_foot, 
+    phi);
 }
 generated quantities {
   int y_rep[N];
@@ -90,7 +96,7 @@ generated quantities {
     real eta_n = 
       mu[building_idx[n]] 
       + kappa[building_idx[n]] * traps[n] 
-      // ... add month-specific parameter
+      + mo[mo_idx[n]]
       + log_sq_foot[n];
       
     y_rep[n] = neg_binomial_2_log_safe_rng(eta_n, phi);
