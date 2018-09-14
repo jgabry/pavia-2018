@@ -336,11 +336,11 @@ comp_model_NB_hier <- stan_model('stan_programs/hier_NB_regression.stan')
 ## ----run-NB-hier---------------------------------------------------------
 fitted_model_NB_hier <-
   sampling(
-  comp_model_NB_hier,
-  data = stan_dat_hier,
-  chains = 4,
-  cores = 4,
-  iter = 4000
+   comp_model_NB_hier,
+   data = stan_dat_hier,
+   chains = 4,
+   cores = 4,
+   iter = 4000
   )
 
 ## ------------------------------------------------------------------------

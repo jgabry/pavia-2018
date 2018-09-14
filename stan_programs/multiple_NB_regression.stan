@@ -39,9 +39,11 @@ model {
 } 
 generated quantities {
   int y_rep[N];
-  for (n in 1:N) 
-    y_rep[n] = neg_binomial_2_log_safe_rng(alpha + beta * traps[n] + beta_super * live_in_super[n]
-                                       + log_sq_foot[n], phi);
+  for (n in 1:N) {
+    real eta_n = alpha + beta * traps[n] + beta_super * live_in_super[n] 
+                  + log_sq_foot[n];
+    y_rep[n] = neg_binomial_2_log_safe_rng(eta_n, phi);
+  }
   
 }
 
