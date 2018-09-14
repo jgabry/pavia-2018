@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>reading-list</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Reading list and useful links</h1>
+
+<ul>
+<li>Compiled September, 2018 by Jonah Gabry</li>
+</ul>
+
+<p>I hope this list is helpful. If I forgot any topics please let me know!</p>
+
+<h3 id="toc_1">Quick links</h3>
+
+<ul>
+<li><a href="http://mc-stan.org">Stan website</a></li>
+<li><a href="http://discourse.mc-stan.org">The Stan Forums</a> (get free help from Stan developers and users)</li>
+<li><a href="http://mc-stan.org/users/documentation/index.html">Stan documentation</a> (links to various kinds of documentation for Stan). Some of the most useful doc pages are:
+
+<ul>
+<li><a href="https://github.com/stan-dev/stan/releases/download/v2.17.0/stan-reference-2.17.0.pdf">Stan Modeling Language User’s Guide and Reference Manual v2.17.0</a></li>
+<li><a href="http://mc-stan.org/users/documentation/case-studies">Case Studies</a></li>
+<li><a href="https://github.com/stan-dev/stan/wiki/Stan-Best-Practices">Best Practices wiki</a></li>
+<li><a href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">Prior Choice Recommendations wiki</a></li>
+</ul></li>
+<li>Stan developer Ben Goodrich&#39;s lecture videos and materials from his masters-level course at Columbia <em>Bayesian Statistics for the Social Sciences</em> <a href="https://www.youtube.com/playlist?list=PLSZp9QshJ8wyPCgoQR0Kw3HDNuy1FEZH9">(YouTube videos,</a> <a href="https://courseworks2.columbia.edu/courses/54170/files">course materials)</a></li>
+<li>Contributed talks and materials from past Stan conferences, including videos, slides, and code (<a href="https://github.com/stan-dev/stancon_talks/blob/master/README.md">stancon_talks repository</a>)</li>
+</ul>
+
+<h3 id="toc_2">R packages from the Stan development team</h3>
+
+<ul>
+<li><a href="http://mc-stan.org/rstan">rstan</a>, the R interface to Stan</li>
+<li><a href="http://mc-stan.org/rstanarm">rstanarm</a> provides a traditional R formula interface for fitting common applied regression models with Stan, without having to write the Stan code yourself</li>
+<li><a href="http://mc-stan.org/bayesplot">bayesplot</a> provides plotting functions for use after fitting a model</li>
+<li><a href="http://mc-stan.org/shinystan">shinystan</a> provides interactive tables and visualizations in a GUI</li>
+<li><a href="http://mc-stan.org/loo">loo</a> provides tools for model comparison and averaging</li>
+<li><a href="https://cran.r-project.org/package=brms">brms</a> is similar to rstanarm with several advantages (more models are implemented, Stan code is simpler to read) and several disadvantages (models not pre-compiled, Stan code is less robust to numerical problems)</li>
+<li><a href="http://mc-stan.org/rstantools">rstantools</a> tools for developing R packages interfacing with Stan</li>
+<li><a href="http://mc-stan.org/projpred">projpred</a> is for projection predictive variable selection, which is described in this paper: http://arxiv.org/abs/1508.02502</li>
+</ul>
+
+<p>You can also find many R packages developed by Stan users that fit Stan models for you. Check out the list of packages that depend on the <strong>rstan</strong> package at <a href="https://cran.r-project.org/package=rstan">cran.r-project.org/package=rstan</a> (scroll down to the <strong>Reverse dependencies</strong> section).</p>
+
+<h3 id="toc_3">Workflow</h3>
+
+<ul>
+<li>Visualization in Bayesian Workflow (<a href="https://arxiv.org/pdf/1709.01449.pdf">paper</a>, <a href="https://github.com/jgabry/bayes-vis-paper">code</a>)</li>
+<li>Jim Savage&#39;s <a href="http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/IntroToStan_basics_workflow.ipynb">A quick-start introduction to Stan for economists</a> is a good guide to Bayesian data analysis workflow regardless of whether or not you care about economics</li>
+<li>Jim Savage&#39;s blog post <a href="http://modernstatisticalworkflow.blogspot.com/2017/01/building-useful-models-for-industrysome.html">Building useful models for industry—some tips
+</a></li>
+</ul>
+
+<h3 id="toc_4">Hamiltonian Monte Carlo (HMC) and related background</h3>
+
+<p>Chi Feng&#39;s interactive MCMC demos that we used in class:</p>
+
+<ul>
+<li>The Markov-chain Monte Carlo Interactive Gallery (<a href="https://chi-feng.github.io/mcmc-demo/">website</a>)</li>
+</ul>
+
+<p>I highly recommend my Stan colleague Michael Betancourt&#39;s intro to HMC paper. Michael has a lot of very technical papers about HMC but this one is primarily focused on providing intuition (e.g., he has a whole section on the connection between HMC and the physics of planetary motion that I mentioned briefly in class):</p>
+
+<ul>
+<li>A Conceptual Introduction to Hamiltonian Monte Carlo (<a href="https://arxiv.org/abs/1701.02434">paper</a>)</li>
+</ul>
+
+<p>This next paper is aimed at ecologists, but the HMC explanation is well written and is worth reading regardless of your field of work/study:</p>
+
+<ul>
+<li>Faster Estimation of Bayesian Models in Ecology using Hamiltonian Monte Carlo (<a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12681/full">paper</a>)</li>
+</ul>
+
+<p>This case study from Stan developer Bob Carpenter uses simple simulations to demonstrate how things get strange (and challenging) very quickly as the number of dimensions grows due to the tension between probability density at the mode and volume in the tails:</p>
+
+<ul>
+<li>Typical Sets and the Curse of Dimensionality (<a href="http://mc-stan.org/users/documentation/case-studies/curse-dims.html">case study</a>)</li>
+</ul>
+
+<h3 id="toc_5">Diagnostics and reparameterization</h3>
+
+<ul>
+<li>Visual MCMC diagnostics (<a href="http://mc-stan.org/bayesplot/articles/visual-mcmc-diagnostics.html">tutorial vignette</a>)</li>
+<li>Diagnosing biased inference with divergences (<a href="http://mc-stan.org/users/documentation/case-studies/divergences_and_bias.html">case study</a>)</li>
+<li>A few simple reparameterizations (<a href="http://modernstatisticalworkflow.blogspot.com/2017/07/a-few-simple-reparameterizations.html">blog post</a>)</li>
+<li>The impact of reparameterization on point estimates (<a href="http://mc-stan.org/users/documentation/case-studies/mle-params.html">case study</a>)</li>
+<li>A bag of tips and tricks for dealing with scale issues (<a href="http://modernstatisticalworkflow.blogspot.com/2016/11/a-bag-of-tips-and-tricks-for-dealing.html">blog post/case study</a>)</li>
+<li>The QR decomposition for regression models (<a href="http://mc-stan.org/users/documentation/case-studies/qr_regression.html">case study</a>)</li>
+</ul>
+
+<h3 id="toc_6">Miscellaneous thoughts on priors</h3>
+
+<ul>
+<li><a href="https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations">Prior Choice Recommendations wiki</a></li>
+<li>How the Shape of a Weakly Informative Prior Affects Inferences (<a href="http://mc-stan.org/users/documentation/case-studies/weakly_informative_shapes.html">case study</a>)</li>
+<li>The Prior Can Often Only Be Understood in the Context of the Likelihood (<a href="http://www.mdpi.com/1099-4300/19/10/555">paper</a>)</li>
+</ul>
+
+<h3 id="toc_7">Heteroscedasticity and collinearity</h3>
+
+<h4 id="toc_8">Heteroscedasticity</h4>
+
+<p>This is only a problem if your model lacks important structure. The generative modeling perspective provides a simple solution to this problem: build a model that allows for different amounts of variability in different subpopulations:</p>
+
+<ul>
+<li>Jeff Arnold&#39;s <a href="https://jrnold.github.io/bayesian_notes/heteroskedasticity.html">notes on heteroscedasticity</a> (with RStan examples)</li>
+</ul>
+
+<h4 id="toc_9">Collinearity</h4>
+
+<ul>
+<li><em>Informative</em> priors on the relevant regression coefficients will help a lot</li>
+<li>The <a href="http://mc-stan.org/users/documentation/case-studies/qr_regression.html">QR reparameterization</a> helps avoid computational issues when you have highly correlated predictors. (<strong>rstanarm</strong> can even do the QR reparameterization automatically for you if you use the argument <code>QR=TRUE</code> when fitting your model.)</li>
+</ul>
+
+<h3 id="toc_10">Multiple comparisons</h3>
+
+<p>Andrew Gelman and coauthors have a paper </p>
+
+<ul>
+<li><a href="https://www.tandfonline.com/doi/abs/10.1080/19345747.2011.618213">Why We (Usually) Don&#39;t Have to Worry About Multiple Comparisons</a></li>
+</ul>
+
+<p>which argues that using a Bayesian multilevel/hierarchical approach usually avoids the problems associated with multiple comparisons.</p>
+
+<h3 id="toc_11">Visualization and graphical model checking</h3>
+
+<p>This is my paper (with many great coauthors!) that many of the course slides were based off of: </p>
+
+<ul>
+<li>Visualization in Bayesian Workflow (<a href="https://arxiv.org/pdf/1709.01449.pdf">paper</a>, <a href="https://github.com/jgabry/bayes-vis-paper">code</a>)</li>
+</ul>
+
+<p>We also have some vignettes for the <strong>bayesplot</strong> package that demonstrate many of the important graphical model checks:</p>
+
+<ul>
+<li><strong>bayesplot</strong> tutorial vignettes (<a href="http://mc-stan.org/bayesplot/articles/index.html">online vignettes</a>)</li>
+</ul>
+
+<h3 id="toc_12">Time series &amp; spatial models</h3>
+
+<ul>
+<li>Chapter 10 in the <a href="https://github.com/stan-dev/stan/releases/download/v2.17.0/stan-reference-2.17.0.pdf">Stan Manual v2.17.0</a></li>
+<li>Mitzi Morris&#39; case study <a href="http://mc-stan.org/users/documentation/case-studies/icar_stan.html">Spatial Models in Stan: Intrinsic Auto-Regressive (ICAR) Models for Areal Data</a> (the BYM model is also discussed)</li>
+<li>Stan tutorial: <a href="http://tharte.github.io/mbt/">Modern Bayesian Tools for Time Series Analysis</a> contributed by Stan users Thomas P. Harte and R. Michael Weylandt.</li>
+<li>Jim Savage&#39;s blog post on <a href="http://modernstatisticalworkflow.blogspot.com/2018/02/regime-switching-models-in-stan.html">Regime-switching models with Stan</a></li>
+<li>Jim Savage&#39;s blog post on <a href="http://modernstatisticalworkflow.blogspot.com/2017/04/hierarchical-vector-autoregression.html">Hierarchical vector autoregression (VAR) with Stan</a></li>
+<li>Lu Zhang&#39;s case study <a href="http://mc-stan.org/users/documentation/case-studies/nngp.html">Nearest neighbor Gaussian process (NNGP) models in Stan</a></li>
+</ul>
+
+<h3 id="toc_13">Measurement error &amp; missing data</h3>
+
+<ul>
+<li>Chapters 11 through 14 in the Stan Manual <a href="https://github.com/stan-dev/stan/releases/download/v2.17.0/stan-reference-2.17.0.pdf">v2.17.0</a></li>
+<li>Ben Goodrich&#39;s course materials for <a href="https://courseworks2.columbia.edu/courses/54170/files/folder/LectureMaterial/Week14?">week 14</a> </li>
+</ul>
+
+<h3 id="toc_14">Survival (duration) analysis</h3>
+
+<p>Some Stan users have written Python and R libraries to help fit certain survival models using Stan: </p>
+
+<ul>
+<li><a href="http://mc-stan.org/rstanarm/articles/jm.html">Estimating Joint Models for Longitudinal and Time-to-Event Data with rstanarm
+</a></li>
+<li><a href="https://github.com/hammerlab/survivalstan">Library of Stan Models for Survival Analysis</a> from Jacki Novik and HammerLab</li>
+<li><a href="https://github.com/giabaio/survHE">survHE R package for fitting survival models via RStan</a> from Gianluca Baio (I&#39;ve never used this but it might be worth trying)</li>
+<li>Chapters 11 through 15 in the <a href="https://github.com/stan-dev/stan/releases/download/v2.17.0/stan-reference-2.17.0.pdf">Stan Manual v2.17.0</a> all have content that relates in some way to survival models even if not explicitly mentioned. </li>
+<li>Paper and Stan code for survival analysis with shrinkage priors from Aki Vehtari (<a href="https://groups.google.com/forum/#!topic/stan-users/IOzu8_tkCSk">link</a>). (Note: this is a few years old so the Stan code may use some deprecated syntax) </li>
+</ul>
+
+<h3 id="toc_15">Model comparison, predictive performance, variable selection</h3>
+
+<p>The <strong>loo</strong> package has several useful vignettes that Aki Vehtari and I recently updated for version 2.0.0:</p>
+
+<ul>
+<li><a href="http://mc-stan.org/loo/articles/loo2-example.html">Using the loo package (version &gt;= 2.0.0)</a></li>
+<li><a href="http://mc-stan.org/loo/articles/loo2-weights.html">Bayesian Stacking and Pseudo-BMA weights using the loo package</a></li>
+<li><a href="http://mc-stan.org/loo/articles/loo2-with-rstan.html">Writing Stan programs for use with the loo package</a></li>
+<li><a href="http://mc-stan.org/loo/articles/loo2-non-factorizable.html">Leave-one-out cross-validation for non-factorizable models</a></li>
+</ul>
+
+<p>Aki Vehtari also has a bunch of tutorials online as well as some blog posts on the topic:</p>
+
+<ul>
+<li><a href="https://github.com/avehtari/modelselection_tutorial/blob/master/README.md">Model selection tutorials</a></li>
+<li><a href="http://andrewgelman.com/author/aki/">Aki&#39;s blog posts</a></li>
+</ul>
+
+<p>Papers from various authors (published in journals but I&#39;m including links to the free arXiv preprint versions):</p>
+
+<ul>
+<li>Practical Bayesian model evaluation using leave-one-out cross-validation and WAIC (<a href="https://arxiv.org/abs/1507.04544">arXiv</a>, <a href="https://github.com/stan-dev/loo">R package</a>)</li>
+<li>Understanding predictive information criteria for Bayesian models (<a href="https://arxiv.org/abs/1307.5928">arXiv</a>)</li>
+<li>Projection predictive variable selection using Stan+R (<a href="http://arxiv.org/abs/1508.02502">arXiv</a>, <a href="http://mc-stan.org/projpred">R package</a>)</li>
+<li>Using stacking to average Bayesian predictive distributions (<a href="https://arxiv.org/abs/1704.02030">arXiv</a>)</li>
+<li>Comparison of Bayesian predictive methods for model selection (<a href="https://arxiv.org/pdf/1503.08650.pdf">arXiv</a>)</li>
+</ul>
+
+<h3 id="toc_16">Horseshoe and other hierarchical shrinkage priors</h3>
+
+<p>(Also related to variable selection)</p>
+
+<ul>
+<li>Aki&#39;s talk at StanCon 2018 Asilomar about regularized horseshoe priors <a href="https://www.youtube.com/watch?v=umk7eOkt5k8">(video)</a></li>
+<li>Michael Betancourt&#39;s case study <a href="https://betanalpha.github.io/assets/case_studies/bayes_sparse_regression.html">Bayes Sparse Regression</a></li>
+<li>Juho and Aki&#39;s paper <a href="https://projecteuclid.org/euclid.ejs/1513306866">Sparsity information and regularization in the horseshoe and other shrinkage priors</a></li>
+</ul>
+
+<h3 id="toc_17">Mixture models</h3>
+
+<ul>
+<li>Michael Betancourt&#39;s <a href="http://mc-stan.org/users/documentation/case-studies/identifying_mixture_models.html">Identifying Bayesian Mixture Models</a> case study</li>
+<li>Chapter 13 in the <a href="https://github.com/stan-dev/stan/releases/download/v2.17.0/stan-reference-2.17.0.pdf">Stan Manual v2.17.0</a></li>
+</ul>
+
+<h3 id="toc_18">Gaussian processes</h3>
+
+<ul>
+<li>Chapter 18 in the <a href="https://github.com/stan-dev/stan/releases/download/v2.17.0/stan-reference-2.17.0.pdf">Stan Manual v2.17.0</a></li>
+<li><p>Michael Betancourt&#39;s case study Robust Gaussian Processes in Stan </p>
+
+<ul>
+<li><a href="https://betanalpha.github.io/assets/case_studies/gp_part1/part1.html">part 1</a></li>
+<li><a href="https://betanalpha.github.io/assets/case_studies/gp_part2/part2.html">part 2</a></li>
+<li><a href="https://betanalpha.github.io/assets/case_studies/gp_part3/part3.html">part 3</a></li>
+</ul></li>
+<li><p>Lu Zhang&#39;s case study <a href="http://mc-stan.org/users/documentation/case-studies/nngp.html">Nearest neighbor Gaussian process (NNGP) models in Stan</a></p></li>
+<li><p>Rob Trangucci&#39;s repository of multi-output GP <a href="http://mc-stan.org/users/documentation/case-studies/nngp.html">code and slides</a></p></li>
+</ul>
+
+<h3 id="toc_19">Discrete choice model</h3>
+
+<p>Condition logit has different meanings in different fields. What we call conditional logit is implemented in the  <strong>rstanarm</strong> package:</p>
+
+<ul>
+<li><code>rstanarm::stan_clogit()</code>(<a href="http://mc-stan.org/rstanarm/reference/stan_clogit.html">function doc</a>,  <a href="http://mc-stan.org/rstanarm/articles/binomial.html#conditional-logit-models">vignette section</a>)</li>
+</ul>
+
+<p>Multinomial logit is a common discrete choice model (which may sometimes also be referred to as conditional logit in a small number of fields): </p>
+
+<ul>
+<li><p>Starting at section 9.3 of the <a href="https://github.com/stan-dev/stan/releases/download/v2.17.0/stan-reference-2.17.0.pdf">Stan Manual v2.17.0</a> the next few sections discuss related topics </p></li>
+<li><p>Rob Trangucci&#39;s case study <a href="https://rawgit.com/rtrangucci/class_20170809/master/multinomial-logit/multinomial-logit-regression.html">Hierarchical multinomial logistic regression models in Stan</a></p></li>
+</ul>
+
+<h3 id="toc_20">Differential equations and pharma models</h3>
+
+<ul>
+<li><p>Some good videos from a workshop on Bayesian PKPD modeling: <a href="https://www.youtube.com/watch?v=bMiKRG5_uHo">Advanced Use of Stan, RStan and Torsten for Pharmacometric Applications</a></p></li>
+<li><p>https://magesblog.com/post/2018-01-30-pkpd-reserving-models/</p></li>
+<li><p><a href="https://zenodo.org/record/1284264#.W5voFC17EnU">Differential equations based models in Stan</a> (from StanCon 2017)</p></li>
+</ul>
+
+<h3 id="toc_21">Stan vs other MCMC options</h3>
+
+<ul>
+<li><p>Appendix B in the <a href="https://github.com/stan-dev/stan/releases/download/v2.17.0/stan-reference-2.17.0.pdf">Stan Manual v2.17.0</a> talks about differences between Stan and Bugs/Jags</p></li>
+<li><p>The only MCMC option that I would say is close to on par with Stan as a (general purpose) MCMC tool is <a href="https://docs.pymc.io/">PyMC3</a>. I like the PyMC3 project a lot (they also have a good implementation of NUTS) but PyMC3 programs can only be run in Python, unlike Stan programs which can be used with any of the Stan interfaces (RStan, PyStan, CmdStan, MatlabStan, and all <a href="http://mc-stan.org/users/interfaces/index.html">the others</a>). But if you are a diehard Python user and so are all of your collaborators you might give PyMC3 a try  </p></li>
+<li><p><a href="https://arxiv.org/abs/1601.03443">Fitting Bayesian item response models in Stata and Stan</a> (paper comparing Stan against Stata&#39;s new MCMC implementation)</p></li>
+</ul>
+
+<h3 id="toc_22">Why do Bayesian modeling?</h3>
+
+<p>Some blog posts on the topic from various authors: </p>
+
+<ul>
+<li><p><a href="http://www.fharrell.com/post/journey/">Frank Harrell</a></p></li>
+<li><p><a href="http://modernstatisticalworkflow.blogspot.com/2017/04/why-learn-bayesian-modeling.html">Jim Savage</a></p></li>
+<li><p><a href="https://www.johndcook.com/blog/2009/04/28/reasons-to-use-bayesian-inference/">John D. Cook</a></p></li>
+</ul>
+
+<h3 id="toc_23">Automatic differentiation &amp; Stan&#39;s math library</h3>
+
+<p>Several Stan developers wrote a paper about the custom implementation of autodiff developed for Stan:  </p>
+
+<ul>
+<li>The Stan Math Library: Reverse-Mode Automatic Differentiation in C++. <a href="https://arxiv.org/abs/1509.07164">arXiv 1509.07164</a></li>
+</ul>
+
+<h3 id="toc_24">Current limitations of Stan</h3>
+
+<p>Here&#39;s a wiki page where we list a lot of things we want to add to Stan going forward. Many of these things are already in progress, but this should help give a sense of some of the current limitations: </p>
+
+<ul>
+<li><a href="https://github.com/stan-dev/stan/wiki/Stan-Road-Map#math-library-roadmap">Stan Roadmap</a></li>
+</ul>
+
+
+
+
+</body>
+
+</html>

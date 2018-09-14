@@ -24,6 +24,10 @@ install.packages(packages)
 
 <br>
 
+### Reading list 
+
+See the `reading-list.pdf` or `reading-list.html` files in the `extra-topics` folder.
+
 ### MCMC demo website 
 
 https://chi-feng.github.io/mcmc-demo/app.html
